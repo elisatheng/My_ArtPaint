@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>My_ArtPaint</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="author" content="Elisa Theng"/>
+
+	<link rel="stylesheet" href="css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="css/styles.css"/>
+	<link rel="stylesheet" href="css/media-queries.css"/>
+	<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="js/My_ArtPaint.js"></script>
+	<script type="text/javascript" src="js/script.js"></script>
+</head>
+<body>
+	<div class="container-fluid">
+		<header class="row text-center header">
+			<h1>My_ArtPaint</h1>
+		</header>
+
+		<aside class="row tools">
+			<div class="col-xl-2 col-lg-2 col-md-12 tools-left">
+				<div class="row">
+					<div class="col-xl-12 col-lg-12 col-md-2 col-sm-2" id="new">
+						<p>New art</p>
+					</div>
+					<div class="col-xl-12 col-lg-12 col-md-2 col-sm-2" id="save">
+						<p><a id="saveAs">Save as...</a></p>
+					</div>
+					<div class="col-xl-12 col-lg-12 col-md-2 col-sm-2" id="upload">
+						<input type="file" id="uploadFile">
+					</div>
+				</div>
+			</div>
+			<div class="col-xl-2 col-lg-2 col-md-12 col-xl-push-8 col-lg-push-8 tools-right">
+				<div class="row">
+					<div class="col-xl-12 col-lg-12 col-md-2 col-sm-2" id="pencil">
+						<div class="row">
+							<img src="img/tools/pencil.png" alt="pencil icon" class="col-xs-4">
+							<p class="col-sm-8">Pencil</p>
+						</div>
+					</div>
+					<div class="col-xl-12 col-lg-12 col-md-2 col-sm-2" id="line">
+						<div class="row">
+							<img src="img/tools/line.png" alt="line icon" class="col-xs-4">
+							<p class="col-sm-8">Line</p>
+						</div>
+					</div>
+					<div class="col-xl-12 col-lg-12 col-md-2 col-sm-2" id="rectangle">
+						<div class="row">
+							<img src="img/tools/rectangle.png" alt="rectangle icon" class="col-xs-4">
+							<p class="col-sm-8">Rectangle</p>
+						</div>
+					</div>
+					<div class="col-xl-12 col-lg-12 col-md-2 col-sm-2" id="circle">
+						<div class="row">
+							<img src="img/tools/circle.png" alt="circle icon" class="col-xs-4">
+							<p class="col-sm-8">Circle</p>
+						</div>
+					</div>
+					<div class="col-xl-12 col-lg-12 col-md-2 col-sm-2" id="rubber">
+						<div class="row">
+							<img src="img/tools/rubber.png" alt="rubber icon" class="col-xs-4">
+							<p class="col-sm-8">Rubber</p>
+						</div>
+					</div>
+					<div class="col-xl-12 col-lg-12 col-md-2 col-sm-2" id="filling">
+						<div class="row">
+							<img src="img/tools/filling.png" alt="filling icon" class="col-xs-4">
+							<p class="col-sm-8">Filling</p>
+						</div>
+					</div>
+					<div class="col-xl-12 col-lg-12 col-md-2 col-sm-2" id="stroke">
+						<div class="row">
+							<input type="color" name="colorPallet" class="col-xs-4" id="colorStrokePicked">
+							<p class="col-sm-8">Stroke color</p>
+						</div>
+					</div>
+					<div class="col-xl-12 col-lg-12 col-md-2 col-sm-2" id="fill">
+						<div class="row">
+							<input type="color" name="colorPallet" class="col-xs-4" id="colorFillPicked">
+							<p class="col-sm-8">Fill color</p>
+						</div>
+					</div>
+					<div class="col-xl-12 col-lg-12 col-md-2 col-sm-2" id="thickness">
+						<div class="row">
+							<img src="img/tools/thickness.png" alt="thickness icon" class="col-xs-4">
+							<select class="col-sm-8" id="thickness-select">
+								<option value="1" selected="selected">Small</option>
+								<option value="5">Medium</option>
+								<option value="9">Large</option>
+								<option value="13">XLarge</option>
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+
+		<div class="col-xl-8 col-lg-8 col-xs-12" id="container-canvas">
+			<canvas id="canvas"></canvas>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+/*MEDIA QUERIES*/
+/*---xl---*/
+@media screen and (max-width: 1200px) {
+	.tools {
+		position: initial;
+	}
+	.tools .tools-left > .row , .tools .tools-right > .row {
+		float: none;
+		text-align: center;
+	}
+	.tools .tools-left > .row > *, .tools .tools-right > .row > * {
+		border-right: 1px solid #666;
+		display: inline-block;
+		float: none;
+  		vertical-align: top;
+	}
+	.tools .tools-left > .row > *:last-child , .tools .tools-right > .row > *:last-child {
+		border-right: none;
+		border-bottom: none;
+	}
+	.tools .tools-left > .row > * > * *, .tools .tools-right > .row > * > * * {
+		display: block;
+		float: none;
+		margin: 0 auto;
+		text-align: center;
+	}
+}
+
+/*---lg---*/
+@media screen and (max-width: 992px) {
+}
+
+/*---md---*/
+@media screen and (max-width: 768px) {
+	.tools img {
+		width: 60px;
+	}
+}
+
+/*---sm---*/
+@media screen and (max-width: 576px) {
+}
