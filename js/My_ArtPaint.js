@@ -148,7 +148,7 @@
 				that.filling.$element.removeClass("active");
 				that.filling.value = false;
 			}
-		})
+		});
 	},
 
 	getThickness : function() {
