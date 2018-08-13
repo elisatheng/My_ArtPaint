@@ -58,13 +58,11 @@
 				that.tools[t] = true;
 
 				that.$canvas.off();
-				that.context.beginPath();
-				
-				// set color and thickness
+
+				that.context.globalCompositeOperation = (t == "rubber") ? "destination-out" : "source-over";
 				that.context.lineCap = "round";
 				that.context.lineWidth = that.thickness.value;
 				that.context.strokeStyle = that.colors.stroke.value;
-				that.context.globalCompositeOperation = (t == "rubber") ? "destination-out" : "source-over";
 
 				// painting
 				if ((that.tools[t] && t == "pencil") || (that.tools[t] && t == "rubber")) 
@@ -95,7 +93,7 @@
 			that.colors[c].value = that.colors[c].$element.val();
 
 			that.colors[c].$element.on("change", function() {
-				that.colors[c].value = that.colors[c].$element.val();
+				that.colors[c].value = that.context.strokeStyle = that.colors[c].$element.val();
 			});
 		});
 	},
@@ -105,7 +103,7 @@
 
 		thickness.value = thickness.$select[0].value;
 		thickness.$element.click(function() {
-			thickness.value = thickness.$select[0].value;
+			thickness.value = that.context.lineWidth = thickness.$select[0].value;
 		});
 	},
 
@@ -124,6 +122,7 @@
 			that.startPoint.x = e.offsetX;
 			that.startPoint.y = e.offsetY;
 			
+			that.context.beginPath();
 			that.context.moveTo(that.startPoint.x, that.startPoint.y);
 		})
 		.mousemove(function(e) {
