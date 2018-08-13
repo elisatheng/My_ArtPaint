@@ -16,78 +16,35 @@
 </head>
 <body>
 	<div class="container-fluid">
-		<header class="row text-center header">
-			<h1>My_ArtPaint</h1>
-		</header>
-
-		<aside class="row tools">
-			<div class="col-xl-2 col-lg-2 col-md-12 tools-left">
-				<div class="row">
-					<div class="col-xl-12 col-lg-12 col-md-2 col-sm-2" id="new">
-						<p>New art</p>
-					</div>
-					<div class="col-xl-12 col-lg-12 col-md-2 col-sm-2" id="save">
-						<p><a id="saveAs">Save as...</a></p>
-					</div>
-					<div class="col-xl-12 col-lg-12 col-md-2 col-sm-2" id="upload">
-						<input type="file" id="uploadFile">
-					</div>
-				</div>
-			</div>
-			<div class="col-xl-2 col-lg-2 col-md-12 col-xl-push-8 col-lg-push-8 tools-right">
-				<div class="row">
-					<div class="col-xl-12 col-lg-12 col-md-2 col-sm-2" id="pencil">
-						<div class="row">
-							<img src="img/tools/pencil.png" alt="pencil icon" class="col-xs-4">
-							<p class="col-sm-8">Pencil</p>
+		<div class="row">
+			<aside class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-12 aside">
+				<header class="header">
+					<h1>My_ArtPaint</h1>
+				</header>
+				<section class="tools">
+					<div class="row tools-settings">
+						<div class="col-xs-12" id="new">
+							<p>New art</p>
+						</div>
+						<div class="col-xs-12" id="save">
+							<p><a id="saveAs">Save as...</a></p>
+						</div>
+						<div class="col-xs-12" id="upload">
+							<input type="file" id="uploadFile">
 						</div>
 					</div>
-					<div class="col-xl-12 col-lg-12 col-md-2 col-sm-2" id="line">
-						<div class="row">
-							<img src="img/tools/line.png" alt="line icon" class="col-xs-4">
-							<p class="col-sm-8">Line</p>
+					<div class="row tools-extra">
+						<div class="col-xs-12" id="stroke">
+							<input type="color" name="colorPallet" id="colorStrokePicked">
+							<p>Stroke color</p>
 						</div>
-					</div>
-					<div class="col-xl-12 col-lg-12 col-md-2 col-sm-2" id="rectangle">
-						<div class="row">
-							<img src="img/tools/rectangle.png" alt="rectangle icon" class="col-xs-4">
-							<p class="col-sm-8">Rectangle</p>
+						<div class="col-xs-12" id="fill">
+							<input type="color" name="colorPallet" id="colorFillPicked">
+							<p>Fill color</p>
 						</div>
-					</div>
-					<div class="col-xl-12 col-lg-12 col-md-2 col-sm-2" id="circle">
-						<div class="row">
-							<img src="img/tools/circle.png" alt="circle icon" class="col-xs-4">
-							<p class="col-sm-8">Circle</p>
-						</div>
-					</div>
-					<div class="col-xl-12 col-lg-12 col-md-2 col-sm-2" id="rubber">
-						<div class="row">
-							<img src="img/tools/rubber.png" alt="rubber icon" class="col-xs-4">
-							<p class="col-sm-8">Rubber</p>
-						</div>
-					</div>
-					<div class="col-xl-12 col-lg-12 col-md-2 col-sm-2" id="filling">
-						<div class="row">
-							<img src="img/tools/filling.png" alt="filling icon" class="col-xs-4">
-							<p class="col-sm-8">Filling</p>
-						</div>
-					</div>
-					<div class="col-xl-12 col-lg-12 col-md-2 col-sm-2" id="stroke">
-						<div class="row">
-							<input type="color" name="colorPallet" class="col-xs-4" id="colorStrokePicked">
-							<p class="col-sm-8">Stroke color</p>
-						</div>
-					</div>
-					<div class="col-xl-12 col-lg-12 col-md-2 col-sm-2" id="fill">
-						<div class="row">
-							<input type="color" name="colorPallet" class="col-xs-4" id="colorFillPicked">
-							<p class="col-sm-8">Fill color</p>
-						</div>
-					</div>
-					<div class="col-xl-12 col-lg-12 col-md-2 col-sm-2" id="thickness">
-						<div class="row">
-							<img src="img/tools/thickness.png" alt="thickness icon" class="col-xs-4">
-							<select class="col-sm-8" id="thickness-select">
+						<div class="col-xs-12" id="thickness">
+							<img src="img/tools/thickness.png" alt="thickness icon">
+							<select id="thickness-select">
 								<option value="1" selected="selected">Small</option>
 								<option value="5">Medium</option>
 								<option value="9">Large</option>
@@ -95,12 +52,38 @@
 							</select>
 						</div>
 					</div>
-				</div>
-			</div>
-		</aside>
+					<div class="row tools-paint">
+						<div class="col-xs-12" id="pencil">
+							<img src="img/tools/pencil.png" alt="pencil icon">
+							<p>Pencil</p>
+						</div>
+						<div class="col-xs-12" id="line">
+							<img src="img/tools/line.png" alt="line icon">
+							<p>Line</p>
+						</div>
+						<div class="col-xs-12" id="rectangle">
+							<img src="img/tools/rectangle.png" alt="rectangle icon">
+							<p>Rectangle</p>
+						</div>
+						<div class="col-xs-12" id="circle">
+							<img src="img/tools/circle.png" alt="circle icon">
+							<p>Circle</p>
+						</div>
+						<div class="col-xs-12" id="rubber">
+							<img src="img/tools/rubber.png" alt="rubber icon">
+							<p>Rubber</p>
+						</div>
+						<div class="col-xs-12" id="filling">
+							<img src="img/tools/filling.png" alt="filling icon">
+							<p>Filling</p>
+						</div>
+					</div>
+				</section>
+			</aside>
 
-		<div class="col-xl-8 col-lg-8 col-xs-12" id="container-canvas">
-			<canvas id="canvas"></canvas>
+			<section class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-xs-12 section">
+				<canvas id="canvas"></canvas>
+			</section>
 		</div>
 	</div>
 </body>
