@@ -84,23 +84,36 @@
 							My_ArtPaint.paintCircle();
 					}
 					else if (type == "setting") {
-						if (tool == "new") {
+						if (tool == "new")
 							that.context.clearRect(0, 0, that.$canvas.width(), that.$canvas.height());
+						if (tool == "save") {
+							$("#" + tool + "As").on('click', function(ev) {
+								$("#" + tool + "As")[0].download = "my_artpaint.png";
+								$("#" + tool + "As")[0].href = that.$canvas[0].toDataURL("image/png");
+							});
 						}
 					}
 				});
-				
+
 			});
 		});
 	},
 
 	setCanvas : function() {
+		// set size
 		that.$canvas.attr('width', that.$container.width());
 		that.$canvas.attr('height', that.$container.height());
 
 		$(window).resize(function() {
 			that.$canvas.css({"display":"block", "margin": "0 auto"});
-		}); 
+		});
+
+		// set white img
+		var img = new Image();
+		img.onload = function() {
+			that.context.drawImage(img, 0, 0, that.$canvas[0].width-1, that.$canvas[0].height-1);
+		};
+		img.src = "img/white.jpg";
 	},
 
 	getColor : function() {
