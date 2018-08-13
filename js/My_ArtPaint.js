@@ -24,6 +24,10 @@
 					"value"	: null
 				}
 			},
+			filling : {
+				"$element" : $("#filling"),
+				"state"	: false
+			},
 			thickness : {
 				"$element" : $("#thickness"),
 				"$select" : $("#thickness-select"),
@@ -58,9 +62,15 @@
 
 	_run : function() {
 		My_ArtPaint.setCanvas();
+		
 		My_ArtPaint.getColor();
+		My_ArtPaint.getFilling();
 		My_ArtPaint.getThickness();
 
+		My_ArtPaint.clickTools();
+	},
+
+	clickTools : function() {
 		$.each(that.tools, function(type, toolObj) {
 			$.each(toolObj, function(tool, toolState) {
 
@@ -78,6 +88,7 @@
 						that.context.lineWidth = that.thickness.value;
 						that.context.strokeStyle = that.colors.stroke.value;
 
+						// paint
 						if ((that.tools[type][tool] && tool == "pencil") || (that.tools[type][tool] && tool == "rubber")) 
 							My_ArtPaint.paintOrErase();
 						else if (that.tools[type][tool] && tool == "line") 
@@ -118,13 +129,26 @@
 	},
 
 	getColor : function() {
-		$.each(that.colors, function(c, element) {
-			that.colors[c].value = that.colors[c].$element.val();
+		$.each(that.colors, function(type, element) {
+			that.colors[type].value = that.colors[type].$element.val();
 
-			that.colors[c].$element.on("change", function() {
-				that.colors[c].value = that.context.strokeStyle = that.colors[c].$element.val();
+			that.colors[type].$element.on("change", function() {
+				that.colors[type].value = that.context[type + "Style"] = that.colors[type].$element.val();
 			});
 		});
+	},
+
+	getFilling : function() {
+		that.filling.$element.on("click", function() {
+			if (!that.filling.$element.hasClass("active")) {
+				that.filling.$element.addClass("active");
+				that.filling.value = true;
+			}
+			else {
+				that.filling.$element.removeClass("active");
+				that.filling.value = false;
+			}
+		})
 	},
 
 	getThickness : function() {
@@ -233,6 +257,13 @@
 				for (var i = 0; i < (pts.length/2); i++) {
 					that.context.lineTo(pts[j], pts[j+1]);
 					that.context.stroke();
+
+					// filling
+					if (that.filling.$element.hasClass("active")) {
+						that.context.fillStyle = that.colors.fill.value;
+						that.context.fill();
+					}
+
 					j += 2;
 				}
 
@@ -263,6 +294,13 @@
 				that.context.beginPath();
 				that.context.arc(pts[0], pts[1], radius, 0, Math.PI*2, true);
 				that.context.stroke();
+
+				// filling
+				if (that.filling.$element.hasClass("active")) {
+					that.context.fillStyle = that.colors.fill.value;
+					that.context.fill();
+				}
+
 				that.context.closePath();
 
 				clickedCpt = 0;
