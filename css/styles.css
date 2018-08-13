@@ -52,3 +52,9 @@ body {
 #container-canvas #canvas {
 	border: 1px solid #000;
 }
+
+
+/*CUSTOM CLASSES*/
+.active {
+	background-color: #ccc;
+}
