@@ -64,12 +64,17 @@
 				that.context.lineCap = "round";
 				that.context.lineWidth = that.thickness.value;
 				that.context.strokeStyle = that.colors.stroke.value;
+				that.context.globalCompositeOperation = (t == "rubber") ? "destination-out" : "source-over";
 
 				// painting
-				if (that.tools[t] && t == "pencil") My_ArtPaint.paintPencil();
-				if (that.tools[t] && t == "line") My_ArtPaint.paintLine();
-				if (that.tools[t] && t == "rectangle") My_ArtPaint.paintRectangle();
-				if (that.tools[t] && t == "circle") My_ArtPaint.paintCircle();
+				if ((that.tools[t] && t == "pencil") || (that.tools[t] && t == "rubber")) 
+					My_ArtPaint.paintOrErase();
+				if (that.tools[t] && t == "line") 
+					My_ArtPaint.paintLine();
+				if (that.tools[t] && t == "rectangle") 
+					My_ArtPaint.paintRectangle();
+				if (that.tools[t] && t == "circle") 
+					My_ArtPaint.paintCircle();
 
 				that.context.closePath();
 			});
@@ -110,7 +115,7 @@
 		});
 	},
 
-	paintPencil: function() {
+	paintOrErase: function() {
 		var mousedownActive = false;
 
 		that.$canvas.mousedown(function(e) {
@@ -202,7 +207,6 @@
 
 	paintCircle: function() {
 		var clickedCpt = 0,
-			j = 0,
 			pts = [];
 
 		that.$canvas.on("click", function(e) {
@@ -221,9 +225,9 @@
 				that.context.stroke();
 
 				clickedCpt = 0;
-				j = 0;
 				pts = [];
 			}
 		});
 	}
+
 };
