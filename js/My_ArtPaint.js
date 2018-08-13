@@ -78,64 +78,20 @@
 
 						if ((that.tools[type][tool] && tool == "pencil") || (that.tools[type][tool] && tool == "rubber")) 
 							My_ArtPaint.paintOrErase();
-						if (that.tools[type][tool] && tool == "line") 
+						else if (that.tools[type][tool] && tool == "line") 
 							My_ArtPaint.paintLine();
-						if (that.tools[type][tool] && tool == "rectangle") 
+						else if (that.tools[type][tool] && tool == "rectangle") 
 							My_ArtPaint.paintRectangle();
-						if (that.tools[type][tool] && tool == "circle") 
+						else if (that.tools[type][tool] && tool == "circle") 
 							My_ArtPaint.paintCircle();
 					}
 					else if (type == "setting") {
 						if (tool == "new")
-							that.context.clearRect(0, 0, that.$canvas.width(), that.$canvas.height());
-						if (tool == "save") {
-							$("#" + tool + "As").on('click', function(ev) {
-								$("#" + tool + "As")[0].download = "my_artpaint.png";
-								$("#" + tool + "As")[0].href = that.$canvas[0].toDataURL("image/png");
-							});
-						}
-						if (tool == "upload") {
-							//-----browse
-							$(":file").change(function (e) {
-								if (this.files && this.files[0]) {
-									that.reader.onload = function(e) {
-										that.img.onload = function() {
-											var wRatio = that.$canvas[0].width / that.img.naturalWidth;
-											var hRatio = that.$canvas[0].height / that.img.naturalHeight;
-											var ratio = Math.min(wRatio, hRatio);
-
-											that.context.drawImage(that.img, 0, 0, that.img.width, that.img.height, 0, 0, that.img.naturalWidth*ratio, that.img.naturalHeight*ratio);
-										};
-
-										that.img.src = e.target.result;
-									};
-									that.reader.readAsDataURL(e.target.files[0]);
-								}
-							});
-
-							//-----drag'n drop
-							that.$canvas.on('dragover', function(e) {
-							    e.preventDefault();
-							})
-							.on('drop', function(e) {
-							    e.preventDefault();
-
-							    var files = e.dataTransfer.files[0];
-
-							    that.reader.onload = function(e) {
-									that.img.onload = function() {
-										var wRatio = that.$canvas[0].width / that.img.naturalWidth;
-										var hRatio = that.$canvas[0].height / that.img.naturalHeight;
-										var ratio = Math.min(wRatio, hRatio);
-
-										that.context.drawImage(that.img, 0, 0, that.img.width, that.img.height, 0, 0, that.img.naturalWidth*ratio, that.img.naturalHeight*ratio);
-									};
-
-									that.img.src = e.target.result;
-								};
-								that.reader.readAsDataURL(files);
-							});
-						}
+							My_ArtPaint.settingNew();
+						else if (tool == "save")
+							My_ArtPaint.settingSave();
+						else if (tool == "upload")
+							My_ArtPaint.settingUpload();
 					}
 				});
 
@@ -306,6 +262,37 @@
 
 				clickedCpt = 0;
 				pts = [];
+			}
+		});
+	},
+
+	settingNew: function() {
+		that.context.clearRect(0, 0, that.$canvas.width(), that.$canvas.height());
+	},
+
+	settingSave: function() {
+		$("#saveAs").on('click', function(ev) {
+			$("#saveAs")[0].download = "my_artpaint.png";
+			$("#saveAs")[0].href = that.$canvas[0].toDataURL("image/png");
+		});
+	},
+
+	settingUpload: function() {
+		// on browse
+		$(":file").change(function (e) {
+			if (this.files && this.files[0]) {
+				that.reader.onload = function(e) {
+					that.img.onload = function() {
+						var wRatio = that.$canvas[0].width / that.img.naturalWidth;
+						var hRatio = that.$canvas[0].height / that.img.naturalHeight;
+						var ratio = Math.min(wRatio, hRatio);
+
+						that.context.drawImage(that.img, 0, 0, that.img.width, that.img.height, 0, 0, that.img.naturalWidth*ratio, that.img.naturalHeight*ratio);
+					};
+
+					that.img.src = e.target.result;
+				};
+				that.reader.readAsDataURL(e.target.files[0]);
 			}
 		});
 	}
