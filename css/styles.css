@@ -1,5 +1,6 @@
 /*GENERAL*/
 body {
+	font-family: 'Josefin Sans', sans-serif;
 	overflow-x: hidden;
 	overflow-y: hidden;
 }
@@ -21,7 +22,6 @@ a {
 .aside {
 	background-color: #e6e6e6;
 }
-
 /*Header*/
 .aside .header {
 	background: url(../img/design.png) center;
@@ -32,7 +32,6 @@ a {
 	padding: 40px 0;
 	text-align: center;
 }
-
 /*Tools*/
 .aside .tools div[class^="col-"] {
 	cursor: pointer;
@@ -68,7 +67,6 @@ a {
 .aside .tools .tools-extra div[class^="col-"] > *, .aside .tools .tools-paint div[class^="col-"] > * {
 	display: inline-block;
 }
-
 /*Toggle*/
 .aside .toggle {
 	background-color: #000;
