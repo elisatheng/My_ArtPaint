@@ -44,7 +44,9 @@
 				}
 			},
 			points : [],
-			startPoint : { x:0, y:0 }
+			startPoint : { x:0, y:0 },
+			img : new Image(),
+			reader : new FileReader()
 		};
 
 		// allow overriding the default elements
@@ -92,6 +94,48 @@
 								$("#" + tool + "As")[0].href = that.$canvas[0].toDataURL("image/png");
 							});
 						}
+						if (tool == "upload") {
+							//-----browse
+							$(":file").change(function (e) {
+								if (this.files && this.files[0]) {
+									that.reader.onload = function(e) {
+										that.img.onload = function() {
+											var wRatio = that.$canvas[0].width / that.img.naturalWidth;
+											var hRatio = that.$canvas[0].height / that.img.naturalHeight;
+											var ratio = Math.min(wRatio, hRatio);
+
+											that.context.drawImage(that.img, 0, 0, that.img.width, that.img.height, 0, 0, that.img.naturalWidth*ratio, that.img.naturalHeight*ratio);
+										};
+
+										that.img.src = e.target.result;
+									};
+									that.reader.readAsDataURL(e.target.files[0]);
+								}
+							});
+
+							//-----drag'n drop
+							that.$canvas.on('dragover', function(e) {
+							    e.preventDefault();
+							})
+							.on('drop', function(e) {
+							    e.preventDefault();
+
+							    var files = e.dataTransfer.files[0];
+
+							    that.reader.onload = function(e) {
+									that.img.onload = function() {
+										var wRatio = that.$canvas[0].width / that.img.naturalWidth;
+										var hRatio = that.$canvas[0].height / that.img.naturalHeight;
+										var ratio = Math.min(wRatio, hRatio);
+
+										that.context.drawImage(that.img, 0, 0, that.img.width, that.img.height, 0, 0, that.img.naturalWidth*ratio, that.img.naturalHeight*ratio);
+									};
+
+									that.img.src = e.target.result;
+								};
+								that.reader.readAsDataURL(files);
+							});
+						}
 					}
 				});
 
@@ -109,11 +153,10 @@
 		});
 
 		// set white img
-		var img = new Image();
-		img.onload = function() {
-			that.context.drawImage(img, 0, 0, that.$canvas[0].width-1, that.$canvas[0].height-1);
+		that.img.onload = function() {
+			that.context.drawImage(that.img, 0, 0, that.$canvas[0].width-1, that.$canvas[0].height-1);
 		};
-		img.src = "img/white.jpg";
+		that.img.src = "img/white.jpg";
 	},
 
 	getColor : function() {
