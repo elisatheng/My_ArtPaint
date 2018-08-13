@@ -9,13 +9,11 @@
 		width: 100%;
 	}
 }
-
 @media screen and (max-width: 980px) {
 	.aside .header h1 {
 		font-size: 34px;
 	}
 }
-
 @media screen and (max-width: 890px) {
 	.aside .header h1 {
 		font-size: 30px;
@@ -23,6 +21,14 @@
 }
 
 /*---md---*/
+@media screen and (min-width: 770px) {
+	.aside .tools {
+		display: block;
+	}
+	.aside .toggle {
+		display: none;
+	}
+}
 @media screen and (max-width: 768px) {
 	body {
 		overflow-y: visible;
@@ -35,6 +41,17 @@
 	}
 	.aside .tools .tools-settings #uploadFile {
 		width: auto;
+	}
+	.aside .toggle {
+		display: block;
+	}
+}
+@media screen and (max-width: 650px) {
+	.aside .toggle {
+		right: 30px;
+	}
+	.section {
+		padding: 30px;
 	}
 }
 
