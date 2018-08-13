@@ -66,9 +66,10 @@
 				that.context.strokeStyle = that.colors.stroke.value;
 
 				// painting
-				if (that.tools[t] && t == "pencil") My_ArtPaint.paintWithPencil();
-				if (that.tools[t] && t == "line") My_ArtPaint.paintWithLine();
-				if (that.tools[t] && t == "rectangle") My_ArtPaint.paintWithRectangle();
+				if (that.tools[t] && t == "pencil") My_ArtPaint.paintPencil();
+				if (that.tools[t] && t == "line") My_ArtPaint.paintLine();
+				if (that.tools[t] && t == "rectangle") My_ArtPaint.paintRectangle();
+				if (that.tools[t] && t == "circle") My_ArtPaint.paintCircle();
 
 				that.context.closePath();
 			});
@@ -109,7 +110,7 @@
 		});
 	},
 
-	paintWithPencil: function() {
+	paintPencil: function() {
 		var mousedownActive = false;
 
 		that.$canvas.mousedown(function(e) {
@@ -134,7 +135,7 @@
 		});
 	},
 
-	paintWithLine: function() {
+	paintLine: function() {
 		var clickedCpt = 0,
 			j = 0,
 			pts = [];
@@ -161,7 +162,7 @@
 		});
 	},
 
-	paintWithRectangle: function() {
+	paintRectangle: function() {
 		var clickedCpt = 0,
 			j = 0,
 			pts = [];
@@ -191,6 +192,33 @@
 					that.context.stroke();
 					j += 2;
 				}
+
+				clickedCpt = 0;
+				j = 0;
+				pts = [];
+			}
+		});
+	},
+
+	paintCircle: function() {
+		var clickedCpt = 0,
+			j = 0,
+			pts = [];
+
+		that.$canvas.on("click", function(e) {
+			++clickedCpt;
+
+			pts.push(e.offsetX);
+			pts.push(e.offsetY);
+
+			if (clickedCpt == 2) {
+				var radiusx = pts[2] - pts[0],
+					radiusy = pts[3] - pts[1],
+					radius = Math.sqrt(( (Math.pow(radiusx, 2) + (Math.pow(radiusy, 2))) ));
+
+				that.context.beginPath();
+				that.context.arc(pts[0], pts[1], radius, 0, Math.PI*2, true);
+				that.context.stroke();
 
 				clickedCpt = 0;
 				j = 0;
