@@ -68,6 +68,10 @@
 				// painting
 				if (that.tools[t] && t == "pencil") 
 					My_ArtPaint.paintWithPencil();
+				if (that.tools[t] && t == "line") 
+					My_ArtPaint.paintWithLine();
+
+				that.context.closePath();
 			});
 		});
 	},
@@ -129,8 +133,32 @@
 		.mouseleave(function() {
 			that.$canvas.mouseup();
 		});
-
-		that.context.closePath();
 	},
 
+	paintWithLine: function() {
+		var clickedCpt = 0,
+			j = 0,
+			pts = [];
+
+		that.$canvas.on("click", function(e) {
+			++clickedCpt;
+
+			pts.push(e.offsetX);
+			pts.push(e.offsetY);
+
+			if (clickedCpt == 2) {
+				that.context.beginPath();
+				
+				for (var i = 0; i < 2; i++) {
+					that.context.lineTo(pts[j], pts[j+1]);
+					that.context.stroke();
+					j += 2;
+				}
+
+				clickedCpt = 0;
+				j = 0;
+				pts = [];
+			}
+		});
+	}
 };
