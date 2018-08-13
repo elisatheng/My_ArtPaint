@@ -30,11 +30,18 @@
 				"value"	: null
 			},
 			tools : {
-				"pencil" : false,
-				"line" : false,
-				"rectangle" : false,
-				"circle" : false,
-				"rubber" : false
+				"paint" : {
+					"pencil" : false,
+					"line" : false,
+					"rectangle" : false,
+					"circle" : false,
+					"rubber" : false
+				},
+				"setting" : {
+					"new" : false,
+					"save" : false,
+					"upload" : false
+				}
 			},
 			points : [],
 			startPoint : { x:0, y:0 }
@@ -52,29 +59,37 @@
 		My_ArtPaint.getColor();
 		My_ArtPaint.getThickness();
 
-		$.each(that.tools, function(t, tbool) {
-			$("#" + t).on("click", function() {
-				My_ArtPaint.initTools();
-				that.tools[t] = true;
+		$.each(that.tools, function(type, toolObj) {
+			$.each(toolObj, function(tool, toolState) {
 
-				that.$canvas.off();
+				$("#" + tool).on("click", function() {
+					My_ArtPaint.initTools();
+					that.tools[type][tool] = true;
 
-				that.context.globalCompositeOperation = (t == "rubber") ? "destination-out" : "source-over";
-				that.context.lineCap = "round";
-				that.context.lineWidth = that.thickness.value;
-				that.context.strokeStyle = that.colors.stroke.value;
+					that.$canvas.off();
 
-				// painting
-				if ((that.tools[t] && t == "pencil") || (that.tools[t] && t == "rubber")) 
-					My_ArtPaint.paintOrErase();
-				if (that.tools[t] && t == "line") 
-					My_ArtPaint.paintLine();
-				if (that.tools[t] && t == "rectangle") 
-					My_ArtPaint.paintRectangle();
-				if (that.tools[t] && t == "circle") 
-					My_ArtPaint.paintCircle();
+					if (type == "paint") {
+						that.context.globalCompositeOperation = (tool == "rubber") ? "destination-out" : "source-over";
+						that.context.lineCap = "round";
+						that.context.lineWidth = that.thickness.value;
+						that.context.strokeStyle = that.colors.stroke.value;
 
-				that.context.closePath();
+						if ((that.tools[type][tool] && tool == "pencil") || (that.tools[type][tool] && tool == "rubber")) 
+							My_ArtPaint.paintOrErase();
+						if (that.tools[type][tool] && tool == "line") 
+							My_ArtPaint.paintLine();
+						if (that.tools[type][tool] && tool == "rectangle") 
+							My_ArtPaint.paintRectangle();
+						if (that.tools[type][tool] && tool == "circle") 
+							My_ArtPaint.paintCircle();
+					}
+					else if (type == "setting") {
+						if (tool == "new") {
+							that.context.clearRect(0, 0, that.$canvas.width(), that.$canvas.height());
+						}
+					}
+				});
+				
 			});
 		});
 	},
@@ -108,8 +123,10 @@
 	},
 
 	initTools : function() {
-		$.each(that.tools, function(t, boolean) {
-			that.tools[t] = false;
+		$.each(that.tools, function(type, toolObj) {
+			$.each(toolObj, function(tool, toolState) {
+				that.tools[type][tool] = false;
+			});
 		});
 	},
 
@@ -137,6 +154,8 @@
 		.mouseleave(function() {
 			that.$canvas.mouseup();
 		});
+
+		that.context.closePath();
 	},
 
 	paintLine: function() {
@@ -159,11 +178,14 @@
 					j += 2;
 				}
 
+				that.context.closePath();
+
 				clickedCpt = 0;
 				j = 0;
 				pts = [];
 			}
 		});
+
 	},
 
 	paintRectangle: function() {
@@ -197,6 +219,8 @@
 					j += 2;
 				}
 
+				that.context.closePath();
+
 				clickedCpt = 0;
 				j = 0;
 				pts = [];
@@ -222,6 +246,7 @@
 				that.context.beginPath();
 				that.context.arc(pts[0], pts[1], radius, 0, Math.PI*2, true);
 				that.context.stroke();
+				that.context.closePath();
 
 				clickedCpt = 0;
 				pts = [];
