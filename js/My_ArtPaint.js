@@ -70,6 +70,8 @@
 
 					that.$canvas.off();
 
+					$("#" + tool).addClass("active");
+
 					if (type == "paint") {
 						that.context.globalCompositeOperation = (tool == "rubber") ? "destination-out" : "source-over";
 						that.context.lineCap = "round";
@@ -138,6 +140,9 @@
 		$.each(that.tools, function(type, toolObj) {
 			$.each(toolObj, function(tool, toolState) {
 				that.tools[type][tool] = false;
+
+				if ($("#" + tool).hasClass("active")) 
+					$("#" + tool).removeClass("active");
 			});
 		});
 	},
