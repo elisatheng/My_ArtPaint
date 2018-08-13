@@ -31,10 +31,10 @@
 			},
 			tools : {
 				"pencil" : false,
-				"rubber" : false,
 				"line" : false,
 				"rectangle" : false,
-				"circle" : false
+				"circle" : false,
+				"rubber" : false
 			},
 			points : [],
 			startPoint : { x:0, y:0 }
@@ -66,10 +66,9 @@
 				that.context.strokeStyle = that.colors.stroke.value;
 
 				// painting
-				if (that.tools[t] && t == "pencil") 
-					My_ArtPaint.paintWithPencil();
-				if (that.tools[t] && t == "line") 
-					My_ArtPaint.paintWithLine();
+				if (that.tools[t] && t == "pencil") My_ArtPaint.paintWithPencil();
+				if (that.tools[t] && t == "line") My_ArtPaint.paintWithLine();
+				if (that.tools[t] && t == "rectangle") My_ArtPaint.paintWithRectangle();
 
 				that.context.closePath();
 			});
@@ -148,8 +147,46 @@
 
 			if (clickedCpt == 2) {
 				that.context.beginPath();
+
+				for (var i = 0; i < (pts.length/2); i++) {
+					that.context.lineTo(pts[j], pts[j+1]);
+					that.context.stroke();
+					j += 2;
+				}
+
+				clickedCpt = 0;
+				j = 0;
+				pts = [];
+			}
+		});
+	},
+
+	paintWithRectangle: function() {
+		var clickedCpt = 0,
+			j = 0,
+			pts = [];
+
+		that.$canvas.on("click", function(e) {
+			++clickedCpt;
+
+			pts.push(e.offsetX);
+			pts.push(e.offsetY);
+
+			if (clickedCpt == 2) {
+				var pts_tmp = pts;
+				var diff = pts_tmp[3] - pts_tmp[1];
+
+				pts = [
+					pts_tmp[0], pts_tmp[1],
+					pts_tmp[0], pts_tmp[1] + diff,
+					pts_tmp[2], pts_tmp[3],
+					pts_tmp[2], pts_tmp[3] - diff,
+					pts_tmp[0], pts_tmp[1]
+				];
+
+				that.context.beginPath();
 				
-				for (var i = 0; i < 2; i++) {
+				for (var i = 0; i < (pts.length/2); i++) {
 					that.context.lineTo(pts[j], pts[j+1]);
 					that.context.stroke();
 					j += 2;
