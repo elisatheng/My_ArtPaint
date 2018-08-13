@@ -11,7 +11,7 @@
 
 	_init : function(settings) {
 		My_ArtPaint.vars = {
-			$container : $("#container-canvas"),
+			$section : $(".section"),
 			$canvas : $('#canvas'),
 			context	: $('#canvas')[0].getContext('2d'),
 			colors : {
@@ -80,9 +80,9 @@
 
 					that.$canvas.off();
 
-					$("#" + tool).addClass("active");
-
 					if (type == "paint") {
+						$("#" + tool).addClass("active");
+
 						that.context.globalCompositeOperation = (tool == "rubber") ? "destination-out" : "source-over";
 						that.context.lineCap = "round";
 						that.context.lineWidth = that.thickness.value;
@@ -114,8 +114,8 @@
 
 	setCanvas : function() {
 		// set size
-		that.$canvas.attr('width', that.$container.width());
-		that.$canvas.attr('height', that.$container.height());
+		that.$canvas.attr('width', that.$section.width());
+		that.$canvas.attr('height', that.$section.height());
 
 		$(window).resize(function() {
 			that.$canvas.css({"display":"block", "margin": "0 auto"});

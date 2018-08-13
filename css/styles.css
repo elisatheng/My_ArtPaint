@@ -1,60 +1,75 @@
 /*GENERAL*/
 body {
-	padding-bottom: 50px;
 	overflow-x: hidden;
+	overflow-y: hidden;
 }
-
-
-/*HEADER*/
-.header {
-	padding: 40px 0;
+a {
+	color: #000;
 }
-
-
-/*TOOLS*/
-.tools {
-	position: absolute;
-}
-.tools .tools-left {
-	text-align: right;
-}
-.tools .tools-right {
-	text-align: left;
-}
-.tools .tools-left > .row , .tools .tools-right > .row  {
-	margin: 5px;
-	padding: 10px;
-}
-.tools .tools-left > .row > * , .tools .tools-right > .row > *  {
-	border-top: 1px solid #666;
-	padding-bottom: 8px;
-	padding-top: 8px;
-}
-.tools .tools-left > .row > *:last-child , .tools .tools-right > .row > *:last-child {
-	border-bottom: 1px solid #666;
-}
-.tools .tools-left > .row > *:hover , .tools .tools-right > .row > *:hover {
-	background-color: #f2f2f2;
-}
-.tools #uploadFile {
-	width: 100%;
-}
-
-
-/*CANVAS*/
-#container-canvas {
-	display: block;
-	float: none;
-	height: 70vh;
-	margin: 0 auto;
-}
-
-#container-canvas #canvas {
-	border: 1px solid #000;
+.aside, .section {
+	height: 100vh;
 }
 
 
 /*CUSTOM CLASSES*/
 .active {
 	background-color: #ccc;
+}
+
+
+/*ASIDE*/
+.aside {
+	background-color: #e6e6e6;
+}
+.aside .header {
+	background: url(../img/design.png) center;
+	background-repeat: no-repeat;
+	background-size: contain;
+	color: #fff;
+	font-weight: bold;
+	padding: 40px 0;
+	text-align: center;
+}
+.aside .tools div[class^="col-"] {
+	cursor: pointer;
+}
+.aside .tools div[class^="col-"]:hover {
+	background-color: #ccc;
+}
+.aside .tools img {
+	width: 30px;
+}
+.aside .tools p {
+	margin: 0;
+}
+.aside .tools > * {
+	margin: 0;
+	padding: 20px 0;
+}
+.aside .tools > * div[class^="col-"] {
+	padding: 6px 0 4px 0;
+	text-align: center;
+}
+.aside .tools .tools-settings {
+	text-align: center;
+}
+.aside .tools .tools-settings #uploadFile {
+	display: block;
+	margin: 0 auto;
+}
+.aside .tools .tools-extra {
+	border-bottom: 1px solid #fff;
+	border-top: 1px solid #fff;
+}
+.aside .tools .tools-extra div[class^="col-"] > *, .aside .tools .tools-paint div[class^="col-"] > * {
+	display: inline-block;
+}
+
+
+/*SECTION*/
+.section {
+	padding: 50px;
+}
+.section #canvas {
+	border: 1px solid #000;
 }
