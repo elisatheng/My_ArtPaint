@@ -1,5 +1,7 @@
 $(function() {
-	My_ArtPaint._init();
+
+	// PLUGIN CALL
+	$(window).My_ArtPaint();
 
 
 	// TOGGLE MENU
@@ -10,4 +12,5 @@ $(function() {
 			? $(".aside .toggle").text("x")
 			: $(".aside .toggle").text("=");
 	});
+	
 });
